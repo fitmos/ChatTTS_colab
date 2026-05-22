@@ -414,10 +414,7 @@ def generate_refine(text_file, oral, laugh, bk, temperature, top_P, top_K, progr
 
 def generate_seed():
     new_seed = random.randint(1, 9999)
-    return {
-        "__type__": "update",
-        "value": new_seed
-    }
+    return gr.update(value=new_seed)
 
 
 def update_label(text):
@@ -477,7 +474,7 @@ with gr.Blocks() as demo:
                     headers=["Index", "Seed", "Name", "Path"],
                     datatype=["number", "number", "str", "str"],
                     interactive=True,
-                    col_count=(4, "fixed"),
+                    column_count=(4, "fixed"),
                     value=display_seeds
                 )
 
@@ -1000,7 +997,7 @@ with gr.Blocks() as demo:
                     headers=["角色", "种子", "语速", "口语", "笑声", "停顿"],
                     datatype=["str", "number", "number", "number", "number", "number"],
                     interactive=True,
-                    col_count=(6, "fixed"),
+                    column_count=(6, "fixed"),
                 )
                 # 生视频按钮
                 script_generate_audio = gr.Button("步骤②：生成音频")

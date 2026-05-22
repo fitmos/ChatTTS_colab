@@ -1,4 +1,13 @@
 cn2an
-pypinyin
 openai
-WeTextProcessing
+pandas
+gradio
+jieba
+torch
+omegaconf
+vocos
+vector_quantize_pytorch
+transformers
+requests
+# pypinyin
+# WeTextProcessing
