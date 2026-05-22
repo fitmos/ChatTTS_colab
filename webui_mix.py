@@ -238,13 +238,13 @@ def audio_interface_empty(num_seeds, texts, progress=gr.Progress(track_tqdm=True
 
 
 def update_audio_components(slider_value):
-    # 根据滑块的值更新 Audio 组件的可见性
+    # 根据滑块的值更新 Audio 和 Button 组件的可见性
     k = int(slider_value)
-    audios = [gr.Audio(visible=True)] * k + [gr.Audio(visible=False)] * (max_audio_components - k)
-    tbs = [gr.Textbox(visible=True)] * k + [gr.Textbox(visible=False)] * (max_audio_components - k)
-    stats = [gr.State(value=None)] * max_audio_components
+    audios = [gr.update(visible=True)] * k + [gr.update(visible=False)] * (max_audio_components - k)
+    buttons = [gr.update(visible=True)] * k + [gr.update(visible=False)] * (max_audio_components - k)
+    stats = [gr.update(value=None)] * max_audio_components
     print(f'k={k}, audios={len(audios)}')
-    return [item for pair in zip(audios, tbs, stats) for item in pair]
+    return [item for pair in zip(audios, buttons, stats) for item in pair]
 
 
 def seed_change(evt: gr.SelectData):
