@@ -22,6 +22,7 @@ parser = argparse.ArgumentParser(description="Gradio ChatTTS MIX")
 parser.add_argument("--source", type=str, default="huggingface", help="Model source: 'huggingface' or 'local'.")
 parser.add_argument("--local_path", type=str, help="Path to local model if source is 'local'.")
 parser.add_argument("--share", default=False, action="store_true", help="Share the server publicly.")
+parser.add_argument("--inbrowser", default=False, action="store_true", help="Automatically open the web UI in a web browser.")
 
 args = parser.parse_args()
 
@@ -1030,4 +1031,4 @@ with gr.Blocks() as demo:
             outputs=[script_audio]
         )
 
-demo.launch(share=args.share, inbrowser=True)
+demo.launch(share=args.share, inbrowser=args.inbrowser)
