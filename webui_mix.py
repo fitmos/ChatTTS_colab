@@ -475,7 +475,7 @@ with gr.Blocks() as demo:
                     headers=["Index", "Seed", "Name", "Path"],
                     datatype=["number", "number", "str", "str"],
                     interactive=True,
-                    column_count=(4, "fixed"),
+                    column_count=4,
                     value=display_seeds
                 )
 
@@ -998,7 +998,7 @@ with gr.Blocks() as demo:
                     headers=["角色", "种子", "语速", "口语", "笑声", "停顿"],
                     datatype=["str", "number", "number", "number", "number", "number"],
                     interactive=True,
-                    column_count=(6, "fixed"),
+                    column_count=6,
                 )
                 # 生视频按钮
                 script_generate_audio = gr.Button("步骤②：生成音频")
