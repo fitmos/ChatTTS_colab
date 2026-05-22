@@ -1,6 +1,10 @@
 import os
 import sys
 
+# 禁用所有外部遥测与分析以防网络阻塞导致服务卡死
+os.environ["GRADIO_ANALYTICS_ENABLED"] = "False"
+os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
+
 sys.path.insert(0, os.getcwd())
 import argparse
 import re
