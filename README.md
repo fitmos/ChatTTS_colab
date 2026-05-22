@@ -69,42 +69,42 @@
    Running on public URL: https://**********.gradio.live
 4. https://**********.gradio.live 就是可以访问的公网地址
 
-### 在 macOS 上运行
+### 在 Windows 上运行（推荐使用 `uv`，已适配 GPU 硬件加速）
 
-1. 安装 [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html)（如果尚未安装）。
-2. 打开终端，创建一个新的 conda 环境：
-   ```bash
-   conda create -n "ChatTTS_colab" python=3.11
+1. **安装 `uv`（Python 包与虚拟环境超级管理器，如果尚未安装）**
+   在 Windows PowerShell 中运行以下命令一键安装：
+   ```powershell
+   irm https://astral.sh/uv/install.ps1 | iex
    ```
-3. 激活刚创建的环境：
+2. **克隆项目并进入项目目录**
    ```bash
-   conda activate ChatTTS_colab
-   ```
-3. 克隆本项目仓库到本地：
-   ```bash
-   git clone git@github.com:6drf21e/ChatTTS_colab.git
-   ```
-4. 手动安装 ChatTTS 依赖到项目目录：
-   ```bash
+   git clone https://github.com/fitmos/ChatTTS_colab.git
    cd ChatTTS_colab
-   git clone -q https://github.com/2noise/ChatTTS
-   cd ChatTTS
-   git checkout -q e6412b1
-   cd ..
-   mv ChatTTS temp
-   mv temp/ChatTTS ./ChatTTS
-   rm -rf temp
    ```
-5. 在项目目录安装 ChatTTS_colab 所需的依赖：
+3. **创建虚拟环境**
    ```bash
-   pip install -r requirements-macos.txt
+   uv venv --python 3.11
    ```
-6. 运行项目，等待自动下载模型：
+4. **激活虚拟环境并安装依赖**
+   *   **GPU 版本（推荐，支持英伟达显卡/RTX 3090 等硬件加速）：**
+       ```powershell
+       .venv\Scripts\activate
+       # 优先安装 CUDA 12.1 版本的 PyTorch 依赖
+       uv pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu121
+       # 安装其余项目依赖
+       uv pip install -r requirements.txt
+       ```
+   *   **CPU 仅运行版本：**
+       ```powershell
+       .venv\Scripts\activate
+       uv pip install -r requirements.txt
+       ```
+5. **启动项目 WebUI**
    ```bash
-   python webui_mix.py
-   # Loading ChatTTS model...
+   uv run python webui_mix.py
    ```
-   一切正常的话会自动打开浏览器。
+   启动成功后，会自动在浏览器中打开 Web 交互界面。
+
 
 ## 常见问题：
 
@@ -124,9 +124,18 @@
       python webui_mix.py --source local --local_path models
    ```
 2. 如果下载模型速度慢，建议使用赛博活菩萨 [@padeoe](https://github.com/padeoe) 的镜像加速 https://hf-mirror.com/
-   ```bash
-    export HF_ENDPOINT=https://hf-mirror.com
-   ```
+   * **Windows PowerShell:**
+     ```powershell
+     $env:HF_ENDPOINT="https://hf-mirror.com"
+     ```
+   * **CMD:**
+     ```cmd
+     set HF_ENDPOINT=https://hf-mirror.com
+     ```
+   * **Linux/macOS:**
+     ```bash
+     export HF_ENDPOINT=https://hf-mirror.com
+     ```
 
 ## 贡献者列表
 
